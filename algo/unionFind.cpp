@@ -41,7 +41,7 @@ void printList(vector<Node*> list) {
     for (Node* each : list) {
         Node *tmp = each;
         while (tmp) {
-            cout << each->getVal() << " (" << each->getParent()->getVal() << ") ";
+            cout << tmp->getVal() << " (" << tmp->getParent()->getVal() << ") ";
             if (tmp == tmp->getParent())
                 break;
             tmp = tmp->getParent();
@@ -69,9 +69,26 @@ vector<Node*> createNodes(int n) {
     return list;
 }
 
+Node *unionFind(Node *a) {
+    while(a != a->getParent()) {
+        a = a->getParent(); 
+    }
+    return a;
+}
+void unionNodes(Node *a, Node *b) {
+    Node *aRoot = unionFind(a);
+    Node *bRoot = unionFind(b);
+    aRoot->setParent(bRoot);
+}
+
 
 int main() {
     vector <Node*> list = createNodes(10);
+    printList(list);
+    unionNodes(list[2], list[3]);
+    unionNodes(list[3], list[4]);
+    unionNodes(list[4], list[5]);
+    cout << "After few Unions\n";
     printList(list);
     freeSpace(list);
     return 0;
