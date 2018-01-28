@@ -58,12 +58,20 @@ public:
             }
         }
 
-        vector<vector<string>> finalAns(ans.size());
+        vector<vector<string>> finalAns;
         for (int i = 0; i < ans.size(); ++i) {
-            finalAns[i].push_back(names[i]);
+            vector<string> tmp;
+            if (ans[i].size() == 0)
+                continue;
+            // cout << names[i] << " :";
+            tmp.push_back(names[i]);
+
             for (auto each : ans[i]) {
-                finalAns[i].push_back(each);
+                // cout << each << " ";
+                tmp.push_back(each);
             }
+            // cout << endl;
+            finalAns.push_back(tmp);
         }
         return finalAns;
     }
